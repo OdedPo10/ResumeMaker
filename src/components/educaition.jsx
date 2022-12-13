@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 
 import { useNavigate } from "react-router-dom";
 
-let wereTogo = true;
+let wereTogo = false;
 
 const Educaition = (props) => {
   const navigate = useNavigate();
@@ -23,14 +23,14 @@ const Educaition = (props) => {
   });
 
   return (
-    <div id="backround" >
+   
       <div id="container" className="shadow-sm p-3 mt-3 mb-5 bg-body rounded">
         <form
           onSubmit={handleSubmit((data) => {
+
             props.handleEducaition(data);
             reset();
-
-            if (wereTogo) {
+            if (wereTogo==true) {
               wereTogo = !wereTogo;
               navigate("/educaition");
             }
@@ -38,8 +38,9 @@ const Educaition = (props) => {
               navigate("/techs");
           })}
         >
-          <h3 className="mb-4 mt-1 mt-1">Education</h3>
-          <div class="form-control mb-2">
+        <h3 className="mb-4 mt-1 mt-1">Education</h3>
+
+          <div class="form-control">
             <div class="row">
               <div class="col">
                 <div className="form-group">
@@ -67,22 +68,10 @@ const Educaition = (props) => {
                 </div>
               </div>
             </div>
-
-
-
-            <div className="form-group">
-              <label>Field of Study</label>
-              <input
-                {...register("filed", { required: "this is required" })}
-                className="form-control"
-                type="text"
-                placeholder="e.g technology and logistics "
-              ></input>
-              <p>{errors.filed?.message}</p>
-            </div>
           </div>
 
-          <div class="form-control mb-1">
+
+          <div class="form-control mt-1">
             <div class="row">
               <div class="col">
                 <div className="form-group">
@@ -94,9 +83,6 @@ const Educaition = (props) => {
                   ></input>
                 </div>
               </div>
-
-
-
               <div class="col">
                 <div className="form-group">
                   <label>End Date</label>
@@ -110,7 +96,8 @@ const Educaition = (props) => {
             </div>
           </div>
 
-          <div class="form-control mb-1">
+
+          <div class="form-control mt-1">
             <div className="form-group ">
               <label>Describe</label>
               <textarea
@@ -123,19 +110,21 @@ const Educaition = (props) => {
             </div>
           </div>
 
-          <button onClick={() => changepath} type="submit" className="btn btn-dark mt-2">add another</button>
+          <button onClick={() => changepath()}  className="btn btn-dark mt-2 me-3">add another</button>
           <button type="submit" className="btn btn-dark mt-2">
             next
           </button>
         </form>
       </div>
-    </div>
+   
   );
 };
 
 
 let changepath = () => {
-  wereTogo = !wereTogo;
+   wereTogo = true;
+   
+ 
 }
 
 export default Educaition;

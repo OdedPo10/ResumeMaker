@@ -18,57 +18,46 @@ export default class Main extends Component {
   state = {
     resume: {
       personalInfo: {
-        wills: "asdb,kjashdaklsjhda,k.sdhalksdhjlasdhalsdhaslkdhj",
-        firstName: "asdfasdf",
-        lastName: "asdfasdfasd",
-        mail: "fasdfas@gmail.com",
-        phoneNumber: "0329482309",
-        Language: ['english', 'arabic'],
-        age: '23',
-        address: 'balbal'
+        wills: "",
+        firstName: "",
+        lastName: "",
+        mail: "",
+        phoneNumber: "",
+        Language: [],
+        age: '',
+        address: ''
       },
-      about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque id dolores veniam nostrum, nesciunt soluta minus sed, ducimus",
-      expiriense: [ {
-        jobTitle: "dasdasd",
-        employer: "asdasd",
-        Sdate: "asdasd",
-        Edate: "asdasdasd",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio non exercitationem eos, voluptas rerum unde cum ipsa quod illo tempora quo at esse fugit, excepturi voluptatem deserunt neque suscipit in! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam sunt voluptatem quidem nulla. Repudiandae error maiores numquam vero temporibus velit aut sapiente tenetur placeat labore dolorum, rem.",
-      },
-     
-   
-      
-    ],
+      about: "",
+      expiriense: [],
       educaition: [],
       techs: {
         best: {
-          techs: [{ value: "sql", label: "sql" }, { value: "js", label: "js" }, { value: "httml", label: "html" }, { value: "httml", label: "html" }, { value: "httml", label: "html" }, { value: "httml", label: "html" }],
+          techs: [],
           level: '88'
         },
         seconed: {
-          techs: [{ value: "pyton", label: "pyton" },
-          { value: "as", label: "as" }, { value: "pyton", label: "pyton" }, { value: "pyton", label: "pyton" }],
-          level: '76'
+          techs: [],
+          level: ''
         },
-        rest: [{ value: "html", label: "html" }, { value: "html", label: "html" }, { value: "html", label: "html" }],
+        rest: [],
 
         links: {
-          linkdin: "https://www.linkedin.com/in/david-kvart-4b16ba256/",
-          gitHub: "https://github.com/DavidKvart/MInesweaperDemo",
+          linkdin: "",
+          gitHub: "",
         },
       }
     },
   };
 
   render() {
-
+console.log(this.state.resume);
     return (
 
 
 
-      <div className="contianer-intro">
-        <body className="d-flex h-100 text-center text-bg-dark">
-          <Container fluid xxl>
+    
+        <body className="text-center text-bg-dark">
+          <Container  >
             <Row>
               <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
                 <header className="mb-auto">
@@ -94,7 +83,8 @@ export default class Main extends Component {
               </div>
             </Row>
 
-            <Row style={{ height: "90vh" }}>
+            <Row style={{ height: "90%" }}>
+              <Col lg={5} >
               <Routes>
                 <Route path="/" element={<Inderdoction />} />
                 <Route
@@ -149,18 +139,23 @@ export default class Main extends Component {
                     />
                   }
                 />
-                <Route path="/final" element={<FinnalDisplay resume={this.state.resume} />} />
+                {/* <Route path="/final" element={<FinnalDisplay resume={this.state.resume} />} /> */}
               </Routes>
+              </Col>
+              
+              <Col lg={7}>
+              <FinnalDisplay resume={this.state.resume} />
+              </Col>
             </Row>
           </Container>
         </body>
-      </div>
+     
 
     );
   }
   handleAbout = (aboutInfo) => {
     let resume = this.state.resume;
-    resume.about = aboutInfo;
+    resume.about = aboutInfo.about;
     this.setState({ resume });
   }
   ////both for personal info//////////////
@@ -171,12 +166,13 @@ export default class Main extends Component {
     resume.personalInfo.mail = personalInfo.mail;
     resume.personalInfo.phoneNumber = personalInfo.phoneNumber;
     resume.personalInfo.wills = personalInfo.wills;
+    resume.personalInfo.address=personalInfo.adress;
     this.setState({ resume });
   };
   handlePersonalInfo_Multis = (selectedOptions) => {
     let resume = this.state.resume;
-    resume.personalInfo.Language[0] = selectedOptions[0].value;
-
+    resume.personalInfo.Language = selectedOptions.map(e=> e.value);
+    console.log(resume.personalInfo.Language)
     this.setState({ resume });
   };
   ///////////////////////////////////////
@@ -212,7 +208,7 @@ export default class Main extends Component {
 
   handleRestofTechs = (picks) => {
     let resume = this.state.resume;
-    resume.techs.rest.techs = picks;
+    resume.techs.rest = picks;
     this.setState({ resume });
 
   };

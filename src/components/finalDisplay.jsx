@@ -34,6 +34,7 @@ const FinnalDisplay = (props) => {
     for (let i = 0; i < techs.rest.length; i++) {
         restTechs = restTechs + ' ' + techs.rest[i].value;
     }
+  
     
     let ex;
     ex=expiriense.map(element=>{
@@ -51,10 +52,10 @@ const FinnalDisplay = (props) => {
     edj=educaition.map(element=>{
         return(
             <div className="timline-card timline-card-primary card shadow-sm" id="outCard2">
-            <div className="card-body">
-                <div class="h5 mb-1">{educaition.degree} <span class="text-muted h6">from {educaition.school}</span></div>
-                <div class="text-muted text-small mb-2">{educaition.Sdate} - {educaition.Edate}</div>
-                <div className="workPar"><p>{educaition.description}</p></div>
+                <div className="card-body">
+                <div class="h5 mb-1">{element.degree} <span class="text-muted h6">from {element.school}</span></div>
+                <div class="text-muted text-small mb-2">{element.Sdate} - {element.Edate}</div>
+                <div className="workPar"><p>{element.description}</p></div>
             </div>
         </div>
         )
@@ -66,7 +67,7 @@ const FinnalDisplay = (props) => {
     }
    
 
-
+console.log(about);
     return (
         <React.Fragment >
             <div className="book">

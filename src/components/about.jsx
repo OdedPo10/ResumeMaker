@@ -19,7 +19,7 @@ const About = (props) => {
 
 
   return (
-    <div id="backround" >
+    
       <div id="container" className="shadow-sm p-3 mt-3 mb-5 bg-body rounded">
         <form
           onSubmit={handleSubmit((data) => {
@@ -43,11 +43,11 @@ const About = (props) => {
 
 
           <button type="submit" className="btn btn-dark mt-2">
-            next
+            continue
           </button>
         </form>
       </div>
-    </div>
+ 
   );
 };
 

@@ -13,7 +13,7 @@ body {
 .book {
     color: black;
     text-align: left;
-    z-index: 1000;
+   max-width: min-content;
 }
 
 .page {

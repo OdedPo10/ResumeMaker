@@ -37,7 +37,7 @@ const Techs = (props) => {
         reset();
         if (wereTogo) {
           wereTogo = !wereTogo;
-          navigate("/");
+          navigate("/final");
         }
 
         else
@@ -45,7 +45,7 @@ const Techs = (props) => {
       })}
     >
 
-      <div id="backround" >
+     
         <div id="containerTechs" className="shadow-sm p-3 mt-3 mb-5 bg-body rounded">
 
           <div class="form-control mt-2">
@@ -116,7 +116,7 @@ const Techs = (props) => {
             next
           </button>
         </div>
-      </div>
+      
     </form >
 
 

@@ -23,6 +23,8 @@ const PersonalInfo = (props) => {
       lastName: "",
       mail: "",
       phoneNumber: "",
+      adress:""
+
     },
   });
   return (
@@ -86,6 +88,10 @@ const PersonalInfo = (props) => {
               ></input>
             </div>
 
+
+            <div class="row">
+              <div class="col">
+              
             <div class="form-group ">
               <label className="mb-2 mt-1 mt-2">Phone number</label>
               <input
@@ -95,6 +101,20 @@ const PersonalInfo = (props) => {
                 id="inputCity"
                 placeholder="0523351768"
               ></input>
+            </div>
+            </div>
+
+          <div class="col"> 
+            <div class="form-group ">
+              <label className="mb-2 mt-1 mt-2">Adress</label>
+              <input
+                {...register("adress")}
+                type="text"
+                class="form-control"
+                placeholder="104 central park st"
+              ></input>
+              </div>
+            </div>
             </div>
           </div>
 
@@ -110,7 +130,7 @@ const PersonalInfo = (props) => {
           </div>
 
           <button type="submit" class="btn btn-dark mt-3">
-            next
+            continue
           </button>
         </form>
       </div >

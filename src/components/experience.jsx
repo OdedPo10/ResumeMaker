@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 
 
-let wereTogo = true;
+let wereTogo = false;
 
 const Experience = (props) => {
   const navigate = useNavigate();
@@ -23,22 +23,18 @@ const Experience = (props) => {
   });
 
   return (
-    <div id="backround" >
+  
       <div id="container" className="shadow-sm p-3 mt-3 mb-5 bg-body rounded">
         <form
           onSubmit={handleSubmit((data) => {
             props.handleXP(data);
             reset();
-            if (wereTogo) {
-
+            if (wereTogo==true) {
               wereTogo = !wereTogo;
               navigate("/ex");
             }
             else
-              navigate("/educaition")
-
-
-
+              navigate("/educaition");
           })}
 
         >
@@ -105,13 +101,13 @@ const Experience = (props) => {
             <p>{errors.description?.message}</p>
           </div>
 
-          <button onClick={() => changepath} type="submit" className="btn btn-dark mt-2 me-3">add another</button>
+          <button onClick={() => changepath()}  className="btn btn-dark mt-2 me-3">add another</button>
           <button type="submit" className="btn btn-dark mt-2">
             next
           </button>
         </form>
       </div>
-    </div>
+ 
   );
 };
 let changepath = () => {
