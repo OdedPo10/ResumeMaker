@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form";
-
-import { useNavigate, Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 let wereTogo = false;
 
@@ -16,14 +14,13 @@ const Experience = (props) => {
     defaultValues: {
       jobTitle: "",
       employer: "",
-      Sdate: "",
-      Edate: "",
+      Sdate: "", //start date
+      Edate: "", //end date
       description: "",
     },
   });
 
   return (
-
     <div id="container" className="shadow-sm p-3 bg-body rounded">
       <form
         onSubmit={handleSubmit((data) => {
@@ -32,27 +29,27 @@ const Experience = (props) => {
           if (wereTogo == true) {
             wereTogo = !wereTogo;
             navigate("/ex");
-          }
-          else
-            navigate("/educaition");
+          } else navigate("/educaition");
         })}
-
       >
         <h3 className="mb-4 mt-1 mt-1">Work Expirience</h3>
+
+        {/* job tilte */}
         <div class="row">
           <div class="col">
             <div className="form-group">
-
               <label>Job title</label>
               <input
                 {...register("jobTitle", { required: "this is required" })}
                 className="form-control"
                 type="text"
+                placeholder="e.g Full stack developer"
               ></input>
               <p>{errors.jobTitle?.message}</p>
             </div>
           </div>
 
+          {/*Employer */}
           <div class="col">
             <div className="form-group">
               <label>Employer</label>
@@ -60,13 +57,14 @@ const Experience = (props) => {
                 {...register("employer", { required: "this is required" })}
                 className="form-control"
                 type="text"
+                placeholder="e.g Microsoft co."
               ></input>
               <p>{errors.employer?.message}</p>
             </div>
           </div>
         </div>
 
-
+        {/*start date */}
         <div class="row">
           <div class="col">
             <div className="form-group">
@@ -79,6 +77,7 @@ const Experience = (props) => {
             </div>
           </div>
 
+          {/*end date */}
           <div class="col">
             <div className="form-group">
               <label>End Date</label>
@@ -91,27 +90,35 @@ const Experience = (props) => {
           </div>
         </div>
 
+        {/*description */}
         <div className="form-group mt-4">
           <label>Describe</label>
           <textarea
             {...register("description", { required: "this is required" })}
             className="form-control"
             rows="6"
+            placeholder="we recommend using no more that 80 words and you cant pass 250 latters"
+            maxlength="250"
           ></textarea>
           <p>{errors.description?.message}</p>
         </div>
 
-        <button onClick={() => changepath()} className="btn btn-dark mt-2 me-3">add another</button>
+        {/*cahnges path and submit */}
+        <button onClick={() => changepath()} className="btn btn-dark mt-2 me-3">
+          add another
+        </button>
+
+        {/*only submit */}
         <button type="submit" className="btn btn-dark mt-2">
           next
         </button>
       </form>
     </div>
-
   );
 };
+//helps control the path
 let changepath = () => {
   wereTogo = !wereTogo;
-}
+};
 
 export default Experience;

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-
+//style import
 import "../src/components/style.css";
-import printIcon from './images/printIcon.png'
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import printIcon from "./images/printIcon.png";
+//pdf import
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
-
+//components import
 import About from "./components/about";
 import PersonalInfo from "./components/personalInfo";
 import Experience from "./components/experience";
@@ -27,9 +27,9 @@ export default class Main extends Component {
         mail: "",
         phoneNumber: "",
         Language: [],
-        age: '',
-        address: '',
-        gender: ''
+        age: "",
+        address: "",
+        gender: "",
       },
       about: "",
       expiriense: [],
@@ -37,11 +37,11 @@ export default class Main extends Component {
       techs: {
         best: {
           techs: [],
-          level: ''
+          level: "",
         },
         seconed: {
           techs: [],
-          level: ''
+          level: "",
         },
         rest: [],
 
@@ -49,17 +49,15 @@ export default class Main extends Component {
           linkdin: "",
           gitHub: "",
         },
-
       },
-      tamplate: '1'
+      tamplate: "1",
     },
   };
 
   render() {
-
     return (
       <body className="text-center text-bg-dark">
-        <div className="container23" >
+        <div className="container23">
           <div id="row1">
             <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
               <header className="mb-auto">
@@ -76,18 +74,27 @@ export default class Main extends Component {
                     <a className="nav-link fw-bold py-1 px-0" href="#">
                       Features
                     </a>
-                    <img onClick={this.printHtml} id="printIcon" src={printIcon} alt="arr" />
+                    <img
+                      onClick={this.printHtml}
+                      id="printIcon"
+                      src={printIcon}
+                      alt="arr"
+                    />
                   </nav>
                 </div>
               </header>
             </div>
           </div>
 
-
-          <div className="row2" >
+          <div className="row2">
             <Routes>
               <Route path="/" element={<Inderdoction />} />
-              <Route path="/tamplate" element={<BgOption handleTamplate={(e) => this.handleTamplate(e)} />} />
+              <Route
+                path="/tamplate"
+                element={
+                  <BgOption handleTamplate={(e) => this.handleTamplate(e)} />
+                }
+              />
               <Route
                 path="/personal"
                 element={
@@ -104,12 +111,16 @@ export default class Main extends Component {
               <Route
                 path="/about"
                 element={
-                  <About handleAbout={(aboutInfo) => this.handleAbout(aboutInfo)} />
+                  <About
+                    handleAbout={(aboutInfo) => this.handleAbout(aboutInfo)}
+                  />
                 }
               />
               <Route
                 path="/ex"
-                element={<Experience handleXP={(xpArr) => this.handleXP(xpArr)} />}
+                element={
+                  <Experience handleXP={(xpArr) => this.handleXP(xpArr)} />
+                }
               />
               <Route
                 path="/educaition"
@@ -126,31 +137,42 @@ export default class Main extends Component {
                 element={
                   <Techs
                     handleLinks={(links) => this.handleLinks(links)}
-                    handleBesttechs={(picks) => { this.handleBesttechs(picks) }}
-                    handleSeconedtechs={(picks) => { this.handleSeconedtechs(picks) }}
-                    handleRestofTechs={(picks) => { this.handleRestofTechs(picks) }}
+                    handleBesttechs={(picks) => {
+                      this.handleBesttechs(picks);
+                    }}
+                    handleSeconedtechs={(picks) => {
+                      this.handleSeconedtechs(picks);
+                    }}
+                    handleRestofTechs={(picks) => {
+                      this.handleRestofTechs(picks);
+                    }}
+                    pickedMain={this.state.resume.techs.best.techs.length} //alow to contol the limit on selected languges
+                    pickedSec={this.state.resume.techs.seconed.techs.length} //alow to contol the limit on selected languges
                   />
                 }
               />
             </Routes>
             <FinnalDisplay resume={this.state.resume} />
           </div>
-
         </div>
-
       </body>
-
-
     );
   }
 
+  /// prints the pdf///
   printHtml = () => {
-
-    var data = document.getElementById('book');
-    var canvas = document.createElement('canvas');
-    // document.getElementById('#page').style.margin = "0px"
-
-    let highetWorking = (1 + Math.ceil((this.state.resume.expiriense.length + this.state.resume.educaition.length) / 4)) * 1160
+    let gitLink = this.state.resume.techs.links.gitHub;
+    let linkdinLink = this.state.resume.techs.links.linkdin;
+    let data = document.getElementById("book"); // element to print
+    let canvas = document.createElement("canvas");
+    let highetWorking = //to count how many pages and set the hight of the pdf
+      (1 +
+        Math.ceil(
+          (this.state.resume.expiriense.length +
+            this.state.resume.educaition.length) /
+            4
+        )) *
+      1160;
 
     canvas.width = 795;
     canvas.height = highetWorking;
@@ -162,47 +184,44 @@ export default class Main extends Component {
       height: 1280,
       windowHeight: 1280,
       windowWidth: 1920,
-
     };
 
     html2canvas(data, options).then((canvas) => {
-      const contentDataURL = canvas.toDataURL('image/png');
-      var pdf = new jsPDF('p', 'px', [highetWorking, 795]);
+      const contentDataURL = canvas.toDataURL("image/png");
+      var pdf = new jsPDF("p", "px", [highetWorking, 795]);
 
       var width = pdf.internal.pageSize.getWidth();
       var height = pdf.internal.pageSize.getHeight();
 
-      pdf.addImage(contentDataURL, 'PNG', 1, 1, width, height);
-      pdf.save(' - Dashboard');
+      pdf.addImage(contentDataURL, "PNG", 1, 1, width, height);
+      //hyper links
+      pdf.link(170, 930, 280, 40, { url: linkdinLink.toString() });
+      pdf.link(170, 1030, 280, 40, { url: gitLink.toString() });
+      pdf.save("ResuMaker");
     });
+  };
 
-  }
+  /// changes back round picture from the div class name using tamplate
   handleTamplate = (e) => {
     let resume = this.state.resume;
-
-    if (typeof (e.target.className[13]) == 'string') {
-      resume.tamplate = e.target.className[12] + e.target.className[13]
+    if (typeof e.target.className[13] == "string") {
+      resume.tamplate = e.target.className[12] + e.target.className[13];
       console.log(resume.tamplate);
-    }
-    else {
+    } else {
       resume.tamplate = e.target.className[12];
-
-
     }
+    this.setState({ resume });
+  };
 
-
-    this.setState({ resume })
-
-
-  }
-
-
+  //handle about form
   handleAbout = (aboutInfo) => {
     let resume = this.state.resume;
     resume.about = aboutInfo.about;
     this.setState({ resume });
-  }
+  };
+
   ////both for personal info//////////////
+  /// handle most of the info
   handlePersonalInfo = (personalInfo) => {
     let resume = this.state.resume;
     resume.personalInfo.firstName = personalInfo.firstName;
@@ -215,24 +234,24 @@ export default class Main extends Component {
     resume.personalInfo.gender = personalInfo.gender;
     this.setState({ resume });
   };
+
+  /// handl only the multi select for languges
   handlePersonalInfo_Multis = (selectedOptions) => {
     let resume = this.state.resume;
-    resume.personalInfo.Language = selectedOptions.map(e => e.value);
+    resume.personalInfo.Language = selectedOptions.map((e) => e.value);
 
     this.setState({ resume });
   };
   ///////////////////////////////////////
 
-  handleSkills = (skillsArr) => {
-    let resume = this.state.resume;
-    resume.skills.push(skillsArr);
-    this.setState({ resume });
-  };
+  /// handle all the expirience form
   handleXP = (xpArr) => {
     let resume = this.state.resume;
     resume.expiriense.push(xpArr);
     this.setState({ resume });
   };
+
+  // handle educaitiopn form
   handleEducaition = (educaitionInfo) => {
     let resume = this.state.resume;
     resume.educaition.push(educaitionInfo);
@@ -256,11 +275,7 @@ export default class Main extends Component {
     let resume = this.state.resume;
     resume.techs.rest = picks;
     this.setState({ resume });
-
   };
-
-
-
 
   handleLinks = (links) => {
     let resume = this.state.resume;
@@ -273,4 +288,3 @@ export default class Main extends Component {
   };
   ///////////////////////////////
 }
-

@@ -1,25 +1,10 @@
-/*
- * Globals
- */
-
-/* Custom default button */
+/* this file mosly contain bootstrap style for nav bar and body */
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
   color: #333;
   text-shadow: none;
-  /* Prevent inheritance from `body` */
 }
-
-/*
- * Base structure
- */
-
-
-/*
- * Header
- */
-
 .nav-masthead .nav-link {
   color: rgba(255, 255, 255, 0.5);
   border-bottom: 0.25rem solid transparent;
@@ -30,7 +15,7 @@
   border-bottom-color: rgba(255, 255, 255, 0.25);
 }
 
-.nav-masthead .nav-link+.nav-link {
+.nav-masthead .nav-link + .nav-link {
   margin-left: 1rem;
 }
 
@@ -91,41 +76,27 @@
   -webkit-overflow-scrolling: touch;
 }
 
-
-
+/* from here is our mostly utility */
 #cont {
   width: 40vw;
   background-color: aliceblue;
-  /* padding: 5vw;
-  margin-left: 10%; */
   position: fixed;
 }
-
 #containerTechs {
   width: 30vw;
   background-color: aliceblue;
   padding: 5vw;
   margin-top: 1cm;
-
-
 }
-
-
-
 form {
   margin-left: 0rem;
   color: black;
   min-width: fit-content;
   margin-right: 2px;
 }
-
 #container {
   height: fit-content;
-
-
-
 }
-
 .container23 {
   display: grid;
   grid-template-rows: 5%, 95%;
@@ -133,11 +104,7 @@ form {
   width: 100%;
   margin-left: 0px;
   margin-right: 0px;
-
-
-
 }
-
 #row1 {
   margin-bottom: 2%;
 }
@@ -147,18 +114,3 @@ form {
   justify-content: space-around;
   gap: 1rem;
 }
-
-/* #col1 {
-  grid-column-start: 1;
-  grid-column-end: 2;
-
-
-}
-
-#col2 {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */

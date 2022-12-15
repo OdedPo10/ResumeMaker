@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-
 import { useNavigate } from "react-router-dom";
 
+// bolean variable that helps me control if the
+//user want to add another form or to sent him to the next page
 let wereTogo = false;
 
 const Educaition = (props) => {
@@ -9,37 +10,34 @@ const Educaition = (props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }, //to print error message
     reset,
   } = useForm({
     defaultValues: {
       school: "",
       degree: "",
       filed: "",
-      Sdate: "",
-      Edate: "",
+      Sdate: "", // start date
+      Edate: "", // end date
       description: "",
     },
   });
 
   return (
-
     <div id="container" className="shadow-sm p-3  bg-body rounded">
       <form
         onSubmit={handleSubmit((data) => {
-
           props.handleEducaition(data);
           reset();
-          if (wereTogo == true) {
+          // this is the function that desides were to send the user
+          if (wereTogo) {
             wereTogo = !wereTogo;
             navigate("/educaition");
-          }
-          else
-            navigate("/final");
+          } else navigate("/final");
         })}
       >
         <h3 className="mb-4 mt-1 mt-1">Education</h3>
-
+        {/* print scholl name input and lable */}
         <div class="form-control">
           <div class="row">
             <div class="col">
@@ -55,6 +53,7 @@ const Educaition = (props) => {
               </div>
             </div>
 
+            {/* print degree name input and lable */}
             <div class="col">
               <div className="form-group">
                 <label>Degree</label>
@@ -70,7 +69,7 @@ const Educaition = (props) => {
           </div>
         </div>
 
-
+        {/* print start date name input and lable */}
         <div class="form-control mt-1">
           <div class="row">
             <div class="col">
@@ -83,6 +82,8 @@ const Educaition = (props) => {
                 ></input>
               </div>
             </div>
+
+            {/* print end date name input and lable */}
             <div class="col">
               <div className="form-group">
                 <label>End Date</label>
@@ -96,7 +97,7 @@ const Educaition = (props) => {
           </div>
         </div>
 
-
+        {/* print textboxvfv name input and lable */}
         <div class="form-control mt-1">
           <div className="form-group ">
             <label>Describe</label>
@@ -110,21 +111,20 @@ const Educaition = (props) => {
           </div>
         </div>
 
-        <button onClick={() => changepath()} className="btn btn-dark mt-2 me-3">add another</button>
+        {/* this button cahnge the path to come back to the same form  */}
+        <button onClick={() => changepath()} className="btn btn-dark mt-2 me-3">
+          add another
+        </button>
         <button type="submit" className="btn btn-dark mt-2">
-          next
+          continue
         </button>
       </form>
     </div>
-
   );
 };
 
-
 let changepath = () => {
   wereTogo = true;
-
-
-}
+};
 
 export default Educaition;
