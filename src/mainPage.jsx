@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 //style import
 import "../src/components/style.css";
 import printIcon from "./images/printIcon.png";
@@ -62,7 +62,14 @@ export default class Main extends Component {
             <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
               <header className="mb-auto">
                 <div>
-                  <h3 className="float-md-start mb-0">ResuMaker</h3>
+                <h3 className="float-md-start mb-0">
+                    <Link
+                      style={{ color: "white", textDecoration: "none" }}
+                      to="/"
+                    >
+                      ResuMaker
+                    </Link>
+                  </h3>
                   <nav className="nav nav-masthead justify-content-center float-md-end">
                     <a
                       className="nav-link fw-bold py-1 px-0 active"

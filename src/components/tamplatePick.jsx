@@ -5,7 +5,7 @@ const BgOption = (props) => {
   let navigat = useNavigate();
   let { handleTamplate } = props;
   let nextPage = () => {
-    navigat("/techs");
+    navigat("/personal");
   };
   return (
     <>

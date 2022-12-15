@@ -166,7 +166,7 @@ const PersonalInfo = (props) => {
                     aria-label="Default select example"
                   >
                     <option value="male">male</option>
-                    <option value="woman">woman</option>
+                    <option value="woman">female</option>
                     <option value="other">other</option>
                   </select>
                   <p>{errors.gender?.message}</p>
