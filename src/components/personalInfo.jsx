@@ -2,12 +2,23 @@ import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 
-const options = [
+let options = [
   { value: "hebrew", label: "hebrew" },
   { value: "english", label: "english" },
   { value: "russian", label: "russian" },
   { value: "arabic", label: "arabic" },
 ];
+let optionList = ["English", "Spanish", "French", "German", "Chinese", "Russian", "Japanese", "Arabic", "Italian", "Portuguese", "Dutch", "Swedish", "Polish", "Korean", "Turkish", "Finnish", "Indonesian", "Norwegian", "Greek", "Thai", "Irish", "Welsh", "Scots", "Scottish Gaelic", "Breton", "Cornish", "Irish Gaelic", "Manx", "Basque", "Luxembourgish",
+  "Afrikaans", "Albanian", "Bosnian", "Macedonian", "Montenegrin", "Serbo-Croatian", "Croatian", "Serbian", "Bosnian", "Montenegrin", "Hindi", "Czech", "Hebrew", "Vietnamese", "Hungarian", "Ukrainian", "Slovak", "Bulgarian", "Croatian", "Lithuanian",
+  "Estonian", "Serbian", "Latvian", "Catalan", "Slovenian", "Romanian", "Persian", "Tamil", "Malay", "Telugu"];
+
+options = optionList.map(e => {
+  return (
+    { value: e, label: e }
+  )
+})
+
+
 
 const PersonalInfo = (props) => {
   const navigate = useNavigate();
@@ -23,7 +34,9 @@ const PersonalInfo = (props) => {
       lastName: "",
       mail: "",
       phoneNumber: "",
-      adress:""
+      adress: "",
+      age: '',
+      gender: ''
 
     },
   });
@@ -37,6 +50,7 @@ const PersonalInfo = (props) => {
             navigate("/about");
           })}
         >
+
           <h3 className="mb-2 mt-1 mt-2">Personal informaition</h3>
           <div class="form-control mb-3">
             <div class="form-group ">
@@ -76,7 +90,34 @@ const PersonalInfo = (props) => {
               </div>
             </div>
           </div>
+          {/* /////////////////////////////////////////////////////////// */}
+          <div class="form-control mb-3">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label className="mb-2 mt-1 mt-2">Date of birth</label>
+                  <input
+                    {...register("age", { required: "this is required" })}
+                    type="date"
+                    class="form-control"
+                    placeholder="17.04.1996"
+                  ></input>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label className="mb-2 mt-1 mt-2">Choose gender</label>
+                  <select   {...register("gender", { required: "this is required" })} class="form-select" aria-label="Default select example">
+                    <option value="male">male</option>
+                    <option value="woman">woman</option>
+                    <option value="other">other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          {/* ///////////////////////////////////////////////////////////// */}
           <div class="form-control mb-3">
             <div class="form-group">
               <label className="mb-2 mt-1 mt-2">Email</label>
@@ -91,30 +132,30 @@ const PersonalInfo = (props) => {
 
             <div class="row">
               <div class="col">
-              
-            <div class="form-group ">
-              <label className="mb-2 mt-1 mt-2">Phone number</label>
-              <input
-                {...register("mail")}
-                type="text"
-                class="form-control"
-                id="inputCity"
-                placeholder="0523351768"
-              ></input>
-            </div>
-            </div>
 
-          <div class="col"> 
-            <div class="form-group ">
-              <label className="mb-2 mt-1 mt-2">Adress</label>
-              <input
-                {...register("adress")}
-                type="text"
-                class="form-control"
-                placeholder="104 central park st"
-              ></input>
+                <div class="form-group ">
+                  <label className="mb-2 mt-1 mt-2">Phone number</label>
+                  <input
+                    {...register("mail")}
+                    type="text"
+                    class="form-control"
+                    id="inputCity"
+                    placeholder="0523351768"
+                  ></input>
+                </div>
               </div>
-            </div>
+
+              <div class="col">
+                <div class="form-group ">
+                  <label className="mb-2 mt-1 mt-2">Adress</label>
+                  <input
+                    {...register("adress")}
+                    type="text"
+                    class="form-control"
+                    placeholder="104 central park st"
+                  ></input>
+                </div>
+              </div>
             </div>
           </div>
 

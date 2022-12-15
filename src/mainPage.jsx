@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Routes, Route } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 import "../src/components/style.css";
+import printIcon from './images/printIcon.png'
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 import About from "./components/about";
@@ -13,6 +15,7 @@ import Educaition from "./components/educaition";
 import Techs from "./components/techs";
 import Inderdoction from "./components/interdoction";
 import FinnalDisplay from "./components/finalDisplay";
+import BgOption from "./components/tamplatePick";
 
 export default class Main extends Component {
   state = {
@@ -25,7 +28,8 @@ export default class Main extends Component {
         phoneNumber: "",
         Language: [],
         age: '',
-        address: ''
+        address: '',
+        gender: ''
       },
       about: "",
       expiriense: [],
@@ -33,7 +37,7 @@ export default class Main extends Component {
       techs: {
         best: {
           techs: [],
-          level: '88'
+          level: ''
         },
         seconed: {
           techs: [],
@@ -45,114 +49,154 @@ export default class Main extends Component {
           linkdin: "",
           gitHub: "",
         },
-      }
+
+      },
+      tamplate: '1'
     },
   };
 
   render() {
-console.log(this.state.resume);
+
     return (
+      <body className="text-center text-bg-dark">
+        <div className="container23" >
+          <div id="row1">
+            <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+              <header className="mb-auto">
+                <div>
+                  <h3 className="float-md-start mb-0">ResuMaker</h3>
+                  <nav className="nav nav-masthead justify-content-center float-md-end">
+                    <a
+                      className="nav-link fw-bold py-1 px-0 active"
+                      aria-current="page"
+                      href="#"
+                    >
+                      Home
+                    </a>
+                    <a className="nav-link fw-bold py-1 px-0" href="#">
+                      Features
+                    </a>
+                    <img onClick={this.printHtml} id="printIcon" src={printIcon} alt="arr" />
+                  </nav>
+                </div>
+              </header>
+            </div>
+          </div>
 
 
+          <div className="row2" >
+            <Routes>
+              <Route path="/" element={<Inderdoction />} />
+              <Route path="/tamplate" element={<BgOption handleTamplate={(e) => this.handleTamplate(e)} />} />
+              <Route
+                path="/personal"
+                element={
+                  <PersonalInfo
+                    handlePersonalInfo={(personalInfo) =>
+                      this.handlePersonalInfo(personalInfo)
+                    }
+                    handlePersonalInfo_Multis={(selectedOptions) =>
+                      this.handlePersonalInfo_Multis(selectedOptions)
+                    }
+                  />
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <About handleAbout={(aboutInfo) => this.handleAbout(aboutInfo)} />
+                }
+              />
+              <Route
+                path="/ex"
+                element={<Experience handleXP={(xpArr) => this.handleXP(xpArr)} />}
+              />
+              <Route
+                path="/educaition"
+                element={
+                  <Educaition
+                    handleEducaition={(educaitionInfo) =>
+                      this.handleEducaition(educaitionInfo)
+                    }
+                  />
+                }
+              />
+              <Route
+                path="/techs"
+                element={
+                  <Techs
+                    handleLinks={(links) => this.handleLinks(links)}
+                    handleBesttechs={(picks) => { this.handleBesttechs(picks) }}
+                    handleSeconedtechs={(picks) => { this.handleSeconedtechs(picks) }}
+                    handleRestofTechs={(picks) => { this.handleRestofTechs(picks) }}
+                  />
+                }
+              />
+            </Routes>
+            <FinnalDisplay resume={this.state.resume} />
+          </div>
 
-    
-        <body className="text-center text-bg-dark">
-          <Container  >
-            <Row>
-              <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-                <header className="mb-auto">
-                  <div>
-                    <h3 className="float-md-start mb-0">ResuMaker</h3>
-                    <nav className="nav nav-masthead justify-content-center float-md-end">
-                      <a
-                        className="nav-link fw-bold py-1 px-0 active"
-                        aria-current="page"
-                        href="#"
-                      >
-                        Home
-                      </a>
-                      <a className="nav-link fw-bold py-1 px-0" href="#">
-                        Features
-                      </a>
-                      <a className="nav-link fw-bold py-1 px-0" href="#">
-                        Contact
-                      </a>
-                    </nav>
-                  </div>
-                </header>
-              </div>
-            </Row>
+        </div>
 
-            <Row style={{ height: "90%" }}>
-              <Col lg={5} >
-              <Routes>
-                <Route path="/" element={<Inderdoction />} />
-                <Route
-                  path="/personal"
-                  element={
-                    <PersonalInfo
-                      handlePersonalInfo={(personalInfo) =>
-                        this.handlePersonalInfo(personalInfo)
-                      }
-                      handlePersonalInfo_Multis={(selectedOptions) =>
-                        this.handlePersonalInfo_Multis(selectedOptions)
-                      }
-                    />
-                  }
-                />
-                <Route
-                  path="/about"
-                  element={
-                    <About handleAbout={(aboutInfo) => this.handleAbout(aboutInfo)} />
-                  }
-                />
-                <Route
-                  path="/ex"
-                  element={<Experience handleXP={(xpArr) => this.handleXP(xpArr)} />}
-                />
-                {/* <Route
-                  path="/skills"
-                  element={
-                    <Skills
-                      handleSkills={(skillsArr) => this.handleSkills(skillsArr)}
-                    />
-                  }
-                /> */}
-                <Route
-                  path="/educaition"
-                  element={
-                    <Educaition
-                      handleEducaition={(educaitionInfo) =>
-                        this.handleEducaition(educaitionInfo)
-                      }
-                    />
-                  }
-                />
-                <Route
-                  path="/techs"
-                  element={
-                    <Techs
-                      handleLinks={(links) => this.handleLinks(links)}
-                      handleBesttechs={(picks) => { this.handleBesttechs(picks) }}
-                      handleSeconedtechs={(picks) => { this.handleSeconedtechs(picks) }}
-                      handleRestofTechs={(picks) => { this.handleRestofTechs(picks) }}
-                    />
-                  }
-                />
-                {/* <Route path="/final" element={<FinnalDisplay resume={this.state.resume} />} /> */}
-              </Routes>
-              </Col>
-              
-              <Col lg={7}>
-              <FinnalDisplay resume={this.state.resume} />
-              </Col>
-            </Row>
-          </Container>
-        </body>
-     
+      </body>
+
 
     );
   }
+
+  printHtml = () => {
+
+    var data = document.getElementById('book');
+    var canvas = document.createElement('canvas');
+    // document.getElementById('#page').style.margin = "0px"
+
+    let highetWorking = (1 + Math.ceil((this.state.resume.expiriense.length + this.state.resume.educaition.length) / 4)) * 1160
+
+    canvas.width = 795;
+    canvas.height = highetWorking;
+
+    var options = {
+      canvas: canvas,
+      scale: 1,
+      width: 1920,
+      height: 1280,
+      windowHeight: 1280,
+      windowWidth: 1920,
+
+    };
+
+    html2canvas(data, options).then((canvas) => {
+      const contentDataURL = canvas.toDataURL('image/png');
+      var pdf = new jsPDF('p', 'px', [highetWorking, 795]);
+
+      var width = pdf.internal.pageSize.getWidth();
+      var height = pdf.internal.pageSize.getHeight();
+
+      pdf.addImage(contentDataURL, 'PNG', 1, 1, width, height);
+      pdf.save(' - Dashboard');
+    });
+
+  }
+  handleTamplate = (e) => {
+    let resume = this.state.resume;
+
+    if (typeof (e.target.className[13]) == 'string') {
+      resume.tamplate = e.target.className[12] + e.target.className[13]
+      console.log(resume.tamplate);
+    }
+    else {
+      resume.tamplate = e.target.className[12];
+
+
+    }
+
+
+    this.setState({ resume })
+
+
+  }
+
+
   handleAbout = (aboutInfo) => {
     let resume = this.state.resume;
     resume.about = aboutInfo.about;
@@ -166,13 +210,15 @@ console.log(this.state.resume);
     resume.personalInfo.mail = personalInfo.mail;
     resume.personalInfo.phoneNumber = personalInfo.phoneNumber;
     resume.personalInfo.wills = personalInfo.wills;
-    resume.personalInfo.address=personalInfo.adress;
+    resume.personalInfo.address = personalInfo.adress;
+    resume.personalInfo.age = personalInfo.age;
+    resume.personalInfo.gender = personalInfo.gender;
     this.setState({ resume });
   };
   handlePersonalInfo_Multis = (selectedOptions) => {
     let resume = this.state.resume;
-    resume.personalInfo.Language = selectedOptions.map(e=> e.value);
-    console.log(resume.personalInfo.Language)
+    resume.personalInfo.Language = selectedOptions.map(e => e.value);
+
     this.setState({ resume });
   };
   ///////////////////////////////////////

@@ -19,35 +19,37 @@ const About = (props) => {
 
 
   return (
-    
-      <div id="container" className="shadow-sm p-3 mt-3 mb-5 bg-body rounded">
-        <form
-          onSubmit={handleSubmit((data) => {
-            props.handleAbout(data);
-            reset();
-            navigate("/ex");
 
-          })}
-        >
-          <div className="form-group">
-            <label>Tell us about your self</label>
-            <textarea
-              {...register("about", { required: "this is required" })}
-              className="form-control"
-              rows="5"
-              placeholder="tell us about your life story , the recomended amout of wards is not more than 100!"
-            ></textarea>
-            <p>{errors.about?.message}</p>
-          </div>
+    <div id="container" className="shadow-sm p-3 mt-3 mb-5 bg-body rounded">
+      <form
+        onSubmit={handleSubmit((data) => {
+          props.handleAbout(data);
+          reset();
+          navigate("/techs");
+
+        })}
+      >
+        <div className="form-group">
+          <h3>Tell us about your self</h3>
+          <p>for best chances of getting ypur dream job we recomned using</p>
+          <p>a 50-100 words paragragh, and right details that are not included  </p>
+          <textarea
+            {...register("about", { required: "this is required" })}
+            className="form-control"
+            rows="5"
+            placeholder="tell us about your life story , the recomended amout of wards is not more than 100!"
+          ></textarea>
+          <p>{errors.about?.message}</p>
+        </div>
 
 
 
-          <button type="submit" className="btn btn-dark mt-2">
-            continue
-          </button>
-        </form>
-      </div>
- 
+        <button type="submit" className="btn btn-dark mt-2">
+          continue
+        </button>
+      </form>
+    </div>
+
   );
 };
 
